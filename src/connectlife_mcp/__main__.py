@@ -20,10 +20,9 @@ import os
 
 # Trigger tool registration (all @mcp.tool() decorators in sub-modules).
 from . import tools
+from .server import mcp, session_manager
 
 _ = tools  # imported only for side-effect registration
-
-from .server import mcp, session_manager
 
 _LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(
