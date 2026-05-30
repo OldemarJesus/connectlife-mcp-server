@@ -19,7 +19,10 @@ import logging
 import os
 
 # Trigger tool registration (all @mcp.tool() decorators in sub-modules).
-from . import tools  # noqa: F401
+from . import tools
+
+del tools  # imported only for side-effect registration
+
 from .server import mcp, session_manager
 
 _LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
