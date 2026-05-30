@@ -22,8 +22,8 @@ Whenever a new `@mcp.tool()` is added, modified, or removed in `src/connectlife_
    - List the new tool under the correct file.
    - If the tool is a new category, add a new row or file reference.
 
-3. **PRD.md** — Add or update Functional Requirements in §4.3:
-   - Assign the next `FR-Tn` ID.
+3. **PRD.md** — Add or update Functional Requirements in the relevant §4 subsection:
+   - Use the existing requirement prefix for that area (for example, `FR-A` for authentication or `FR-T` for appliance tools).
    - Describe what the tool does, its parameters, and its return value.
    - Mention optimistic-update behaviour if it is a write tool.
    - Mention `session_id` optional behaviour if default-session aware.

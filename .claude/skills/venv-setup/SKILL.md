@@ -2,7 +2,7 @@
 name: venv-setup
 description: Ensure a Python virtual environment exists in this repo and is used before running tests, installing dependencies, or executing Python code.
 argument-hint: (optional) action to perform — "check", "create", or "install-deps"
-allowed-tools: Bash(python*) Bash(pip*) Read Edit
+allowed-tools: Bash(ls *) Bash(python*) Bash(pip*) Bash(.venv/bin/python *) Bash(.venv/bin/pip *) Read Edit
 tags: [python, venv, setup, dependencies]
 ---
 
