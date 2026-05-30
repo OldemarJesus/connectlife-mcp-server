@@ -1,8 +1,8 @@
 name: CI — lint, type-check, test, security
 
-- permissions:
--   contents: read
--
+permissions:
+  contents: read
+
 on:
   pull_request:
   push:
@@ -12,8 +12,8 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-+   permissions:
-+     contents: read
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
@@ -26,8 +26,8 @@ jobs:
 
   type-check:
     runs-on: ubuntu-latest
-+   permissions:
-+     contents: read
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
@@ -39,8 +39,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-+   permissions:
-+     contents: read
+    permissions:
+      contents: read
     strategy:
       matrix:
         python-version: ["3.13", "3.14"]
@@ -60,8 +60,8 @@ jobs:
 
   security:
     runs-on: ubuntu-latest
-+   permissions:
-+     contents: read
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
