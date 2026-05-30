@@ -1,3 +1,10 @@
+---
+name: update-docs
+description: Update README, ARCH, PRD, AGENTS, and tests when MCP tools change.
+argument-hint: (optional) tool or change summary
+allowed-tools: Read Edit Bash(git diff --stat)
+tags: [documentation, tools]
+---
 # Skill: Update Documentation for New Tools
 
 ## When to invoke
