@@ -122,12 +122,14 @@ class TestSessionManagerRemove:
         """Removing an existing session returns True."""
         session = Session(session_id="r1", username="u", api=MagicMock())
         fresh_manager._sessions["r1"] = session
-        assert await fresh_manager.remove("r1") is True
+        result = await fresh_manager.remove("r1")
+        assert result is True
         assert "r1" not in fresh_manager._sessions
 
     async def test_remove_missing(self, fresh_manager: SessionManager) -> None:
         """Removing a missing session returns False."""
-        assert await fresh_manager.remove("ghost") is False
+        result = await fresh_manager.remove("ghost")
+        assert result is False
 
     async def test_remove_cancels_poll_task(self, fresh_manager: SessionManager) -> None:
         """remove() cancels an active polling task."""

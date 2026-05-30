@@ -65,7 +65,7 @@ class SessionManager:
         try:
             session = await self._relogin_default()
         except Exception:
-            _LOGGER.exception("Failed to initialize default session for %s", username)
+            _LOGGER.exception("Failed to initialize default session")
             return
 
         if session.poll_task is None or session.poll_task.done():
@@ -73,7 +73,7 @@ class SessionManager:
                 self._poll_loop(self._default_session_id),
                 name="poll-default",
             )
-        _LOGGER.info("Default session initialized for %s", username)
+        _LOGGER.info("Default session initialized")
 
     async def create(self, username: str, password: str) -> str:
         """Authenticate with ConnectLife and return a new session token.
@@ -105,7 +105,7 @@ class SessionManager:
         async with self._lock:
             self._sessions[session_id] = session
 
-        _LOGGER.info("Session created for %s (id=…%s)", username, session_id[-8:])
+        _LOGGER.info("Session created (id=…%s)", session_id[-8:])
         return session_id
 
     def get(self, session_id: str) -> Session:
@@ -212,7 +212,7 @@ class SessionManager:
                 session.appliances = {a.device_id: a for a in api.appliances}
                 session.last_used = _utcnow()
 
-        _LOGGER.info("Default session re-authenticated for %s", username)
+        _LOGGER.info("Default session re-authenticated")
         return session
 
     async def _poll_loop(self, session_id: str) -> None:
