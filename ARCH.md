@@ -112,7 +112,7 @@ All tool modules import `mcp` from `server.py` and register functions with `@mcp
 
 | File | Tools | Write or Read |
 |------|-------|---------------|
-| `auth.py` | `login`, `logout`, `whoami` | n/a (auth) |
+| `auth.py` | `login`, `logout`, `whoami`, `auto_login` | n/a (auth) |
 | `devices.py` | `list_appliances`, `get_appliance`, `get_status`, `get_daily_energy` | Read |
 | `commands.py` | `update_property`, `update_properties` | Write |
 

@@ -78,4 +78,4 @@ docker build -t connectlife-mcp-server .
 2. Import `from ..server import mcp, session_manager`.
 3. Define `async def my_tool(session_id: str = "", ...) -> dict:` decorated with `@mcp.tool()`.
 4. Resolve session, look up appliance (if needed), call API, handle errors, return dict.
-5. Update `README.md` tool table and `PRD.md` requirements if product scope changes.
+5. Update `README.md` tool table, `ARCH.md` §2.4 tools table, and `PRD.md` §4.3 requirements if product scope changes. Use the `update-docs` skill to stay consistent.

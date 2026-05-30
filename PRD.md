@@ -38,6 +38,7 @@ This project was inspired by and initially based on the ConnectLife integration 
 ### 4.1 Authentication
 - **FR-A1** The server MUST support automatic login from `MCP_CONNECTLIFE_USERNAME` and `MCP_CONNECTLIFE_PASSWORD` environment variables on startup.
 - **FR-A2** When auto-login env vars are absent, the server MUST provide a `login` tool that returns a `session_id`.
+- **FR-A2a** The server MUST provide an `auto_login` tool that returns the active default session ID or creates one from env vars; this allows LLM clients to discover and reuse sessions even when auto-login happened on the backend.
 - **FR-A3** The server MUST re-authenticate silently when the ConnectLife token expires (default session only).
 - **FR-A4** Only username + password authentication is supported; SSO (Google, Apple) is explicitly out of scope.
 

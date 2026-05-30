@@ -68,6 +68,7 @@ When **environment variables are NOT set** (multi-tenant or testing mode):
 | `login` | Log in and obtain a `session_id` |
 | `logout` | Invalidate a session |
 | `whoami` | Return session info |
+| `auto_login` | Get or create a valid session ID using env vars |
 | `list_appliances` | List all linked appliances |
 | `get_appliance` | Get details for one appliance |
 | `get_status` | Get all current property values |

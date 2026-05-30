@@ -1,4 +1,4 @@
-"""Authentication MCP tools: login, logout, whoami."""
+"""Authentication MCP tools: login, logout, whoami, auto_login."""
 
 from connectlife.api import LifeConnectAuthError
 
@@ -45,6 +45,41 @@ async def logout(session_id: str = "") -> dict:
     if not removed:
         return {"error": "Session not found"}
     return {"message": "Logged out successfully"}
+
+
+@mcp.tool()
+async def auto_login() -> dict:
+    """Return an active session ID, creating one from environment variables if needed.
+
+    If ``MCP_CONNECTLIFE_USERNAME`` and ``MCP_CONNECTLIFE_PASSWORD`` are
+    configured, the server ensures a default session exists (re-authenticating
+    if necessary) and returns its ID.
+
+    If no environment credentials are present but an explicit session exists,
+    the first available session ID is returned.
+
+    Returns ``error`` when no credentials are configured and no explicit
+    session is active.
+    """
+    # Default credentials configured — resolve/create the default session
+    if session_manager._default_credentials is not None:
+        try:
+            session = await session_manager.resolve_session(None)
+        except SessionError as err:
+            return {"error": str(err)}
+        except Exception as err:
+            return {"error": str(err)}
+        return {"session_id": session.session_id}
+
+    # No env vars — check for any explicit session
+    if session_manager._sessions:
+        session = next(iter(session_manager._sessions.values()))
+        return {"session_id": session.session_id}
+
+    return {
+        "error": "No credentials configured. Set MCP_CONNECTLIFE_USERNAME and "
+        "MCP_CONNECTLIFE_PASSWORD environment variables, or call login() first."
+    }
 
 
 @mcp.tool()

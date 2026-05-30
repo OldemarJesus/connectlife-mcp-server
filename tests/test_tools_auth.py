@@ -1,4 +1,4 @@
-"""Tests for authentication tools (login, logout, whoami)."""
+"""Tests for authentication tools (login, logout, auto_login, whoami)."""
 
 from __future__ import annotations
 
@@ -65,6 +65,47 @@ class TestLogout:
             mgr._default_session_id = None
             result = await auth.logout("")
         assert result == {"error": "Session not found"}
+
+
+class TestAutoLogin:
+    async def test_default_credentials_success(self) -> None:
+        session = MagicMock()
+        session.session_id = "__default__"
+
+        with patch.object(auth, "session_manager") as mgr:
+            mgr._default_credentials = ("alice", "secret")
+            mgr.resolve_session = AsyncMock(return_value=session)
+            result = await auth.auto_login()
+
+        assert result == {"session_id": "__default__"}
+
+    async def test_default_credentials_session_error(self) -> None:
+        with patch.object(auth, "session_manager") as mgr:
+            mgr._default_credentials = ("alice", "secret")
+            mgr.resolve_session = AsyncMock(side_effect=SessionError("expired"))
+            result = await auth.auto_login()
+
+        assert result == {"error": "expired"}
+
+    async def test_fallback_to_explicit_session(self) -> None:
+        session = MagicMock()
+        session.session_id = "tok-456"
+
+        with patch.object(auth, "session_manager") as mgr:
+            mgr._default_credentials = None
+            mgr._sessions = {"tok-456": session}
+            result = await auth.auto_login()
+
+        assert result == {"session_id": "tok-456"}
+
+    async def test_no_credentials_no_sessions(self) -> None:
+        with patch.object(auth, "session_manager") as mgr:
+            mgr._default_credentials = None
+            mgr._sessions = {}
+            result = await auth.auto_login()
+
+        assert "error" in result
+        assert "No credentials configured" in result["error"]
 
 
 class TestWhoami:
