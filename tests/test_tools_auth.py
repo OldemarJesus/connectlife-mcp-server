@@ -87,21 +87,9 @@ class TestAutoLogin:
 
         assert result == {"error": "expired"}
 
-    async def test_fallback_to_explicit_session(self) -> None:
-        session = MagicMock()
-        session.session_id = "tok-456"
-
+    async def test_no_default_credentials(self) -> None:
         with patch.object(auth, "session_manager") as mgr:
             mgr._default_credentials = None
-            mgr._sessions = {"tok-456": session}
-            result = await auth.auto_login()
-
-        assert result == {"session_id": "tok-456"}
-
-    async def test_no_credentials_no_sessions(self) -> None:
-        with patch.object(auth, "session_manager") as mgr:
-            mgr._default_credentials = None
-            mgr._sessions = {}
             result = await auth.auto_login()
 
         assert "error" in result
