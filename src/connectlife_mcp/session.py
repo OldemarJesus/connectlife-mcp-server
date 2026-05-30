@@ -32,7 +32,7 @@ class Session:
 
     session_id: str
     username: str
-    api: ConnectLifeApi
+    api: ConnectLifeApi = field(repr=False)
     appliances: dict[str, ConnectLifeAppliance] = field(default_factory=dict)
     created_at: datetime = field(default_factory=_utcnow)
     last_used: datetime = field(default_factory=_utcnow)
