@@ -19,6 +19,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/connectlife_mcp"]
 
+[tool.hatch.version]
+path = "src/connectlife_mcp/__init__.py"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
