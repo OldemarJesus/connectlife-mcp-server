@@ -37,7 +37,6 @@ class Session:
     created_at: datetime = field(default_factory=_utcnow)
     last_used: datetime = field(default_factory=_utcnow)
     poll_task: asyncio.Task | None = field(default=None, repr=False, compare=False)
-    _lock: asyncio.Lock = field(default_factory=asyncio.Lock)
 
 
 class SessionManager:
