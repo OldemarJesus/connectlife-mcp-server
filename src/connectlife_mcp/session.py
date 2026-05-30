@@ -65,7 +65,7 @@ class SessionManager:
         try:
             session = await self._relogin_default()
         except Exception:
-            _LOGGER.exception("Failed to initialize default session for %s", username)
+            _LOGGER.exception("Failed to initialize default session")
             return
 
         if session.poll_task is None or session.poll_task.done():
