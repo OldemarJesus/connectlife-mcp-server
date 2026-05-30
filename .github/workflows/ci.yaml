@@ -1,0 +1,61 @@
+name: CI — lint, type-check, test, security
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install the project
+        run: pip install -e ".[dev]"
+      - run: ruff check src tests
+      - run: ruff format --check src tests
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install the project
+        run: pip install -e ".[dev]"
+      - run: pyright
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install the project
+        run: pip install -e ".[dev]"
+      - run: pytest --cov-report=xml
+      - uses: codecov/codecov-action@v5
+        if: matrix.python-version == '3.13'
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install the project
+        run: pip install -e ".[dev]"
+      - run: bandit -r src/connectlife_mcp

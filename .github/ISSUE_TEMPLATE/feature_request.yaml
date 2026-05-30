@@ -1,0 +1,40 @@
+---
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make this project better? We'd love to hear it. Please describe your use case and proposed solution below.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Use Case
+      description: What problem does this solve? Who benefits?
+      placeholder: As a developer running this in Kubernetes, I want...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work? Be as specific as you like.
+      placeholder: Add a new tool `get_weekly_energy` that returns...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches did you think of? Why did you reject them?
+      placeholder: I considered using an external cron job, but...
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: I am willing to work on this feature if accepted.
+          required: false

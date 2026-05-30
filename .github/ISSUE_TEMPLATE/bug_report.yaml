@@ -1,0 +1,62 @@
+---
+name: Bug Report
+description: Report a bug or unexpected behavior
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill out the sections below so we can investigate quickly.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The server should return a list of appliances...
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What happened instead?
+      placeholder: The server returned an error dictionary with "error": "Session expired"...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Provide a minimal set of steps that consistently triggers the issue.
+      placeholder: |
+        1. Start the server with `MCP_CONNECTLIFE_USERNAME` set
+        2. Call `login` with no arguments
+        3. Call `get_status` with device_id "abc123"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Paste the output of `python --version`, OS info, and how you are running the server.
+      placeholder: |
+        - Python 3.13.2
+        - Ubuntu 24.04
+        - Docker (ghcr.io/...:latest)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Stack Trace
+      description: If applicable, paste relevant log output. **Redact any credentials or session tokens.**
+      render: text
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: I have redacted any sensitive information from logs.
+          required: true
