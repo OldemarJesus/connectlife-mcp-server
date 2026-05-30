@@ -1,5 +1,8 @@
 name: CI — lint, type-check, test, security
 
+permissions:
+  contents: read
+
 on:
   pull_request:
   push:
