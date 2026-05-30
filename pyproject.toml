@@ -1,9 +1,9 @@
 [project]
 name = "connectlife-mcp-server"
-version = "0.1.0"
 description = "Standalone MCP server for ConnectLife smart appliances"
 readme = "README.md"
 requires-python = ">=3.13"
+dynamic = ["version"]
 dependencies = [
     "fastmcp>=3.2.0",
     "connectlife>=0.7.1",

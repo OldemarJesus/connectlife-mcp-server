@@ -126,3 +126,15 @@ docker run --rm -p 127.0.0.1:8000:8000 \
   -e MCP_CONNECTLIFE_PASSWORD="yourpassword" \
   connectlife-mcp-server
 ```
+
+## Versioning
+
+This project follows [Semantic Versioning 2.0.0](https://semver.org/):
+
+| Change type | Version bump | Example |
+|-------------|--------------|---------|
+| Bug fix | **PATCH** (`x.x.Y`) | `1.0.1` |
+| New tool or feature | **MINOR** (`x.Y.0`) | `1.1.0` |
+| Breaking change | **MAJOR** (`Y.0.0`) | `2.0.0` |
+
+See [`RELEASE.md`](RELEASE.md) for the full release policy and automation details.
