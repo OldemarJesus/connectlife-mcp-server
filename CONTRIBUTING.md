@@ -202,21 +202,26 @@ Before opening a PR, please make sure:
 
 ### PR Title Format
 
-Use a conventional prefix so changelogs can be generated automatically:
+Use a [Conventional Commit](https://www.conventionalcommits.org/) prefix so changelogs can be generated automatically. Each prefix maps to a [Semantic Versioning](https://semver.org/) impact:
 
-| Prefix | Use when... |
-|--------|-------------|
-| `feat:` | Adding a new tool or capability |
-| `fix:` | Bug fix |
-| `docs:` | Documentation-only change |
-| `refactor:` | Code change that neither fixes a bug nor adds a feature |
-| `test:` | Adding or updating tests |
-| `chore:` | Dependency updates, CI tweaks, build changes |
+| Prefix | SemVer impact | Use when... |
+|--------|---------------|-------------|
+| `feat:` | **MINOR** (`x.Y.0`) | Adding a new tool or capability |
+| `fix:` | **PATCH** (`x.x.Y`) | Bug fix |
+| `docs:` | **PATCH** (`x.x.Y`) | Documentation-only change |
+| `refactor:` | **PATCH** (`x.x.Y`) | Code change that neither fixes a bug nor adds a feature |
+| `test:` | *(none)* | Adding or updating tests |
+| `chore:` | *(none)* | Dependency updates, CI tweaks, build changes |
+| `perf:` | **PATCH** (`x.x.Y`) | Performance improvement with no API change |
+| `BREAKING CHANGE:` / `!` | **MAJOR** (`Y.0.0`) | Incompatible change — document migration in commit footer |
 
 Examples:
-- `feat: add get_weekly_energy tool`
-- `fix: handle missing appliance in get_status`
-- `docs: update README with Podman instructions`
+- `feat: add get_weekly_energy tool` → bumps **MINOR** → `1.2.0`
+- `fix: handle missing appliance in get_status` → bumps **PATCH** → `1.0.1`
+- `docs: update README with Podman instructions` → bumps **PATCH** → `1.0.1`
+- `feat!: remove legacy login tool\n\nBREAKING CHANGE: use env-var auth instead` → bumps **MAJOR** → `2.0.0`
+
+> See [`RELEASE.md`](RELEASE.md) for the full version policy and release workflow.
 
 ---
 
