@@ -44,11 +44,14 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=match,pattern=v(.*),group=1,enable={{is_version}}
-            type=raw,value=latest,enable={{is_version}}
+            # latest = most recent main or release (Option A: tag both)
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref_type == 'tag' }}
+            # Extract semantic version from v* tags (e.g., v1.0.0 → 1.0.0)
+            type=match,pattern=v(.*),group=1,enable=${{ github.ref_type == 'tag' }}
+            # Fallback to git ref (branch name or full tag)
             type=ref,event=branch
             type=ref,event=tag
+            # Commit SHA for traceability
             type=sha,prefix=sha-
 
       - name: Build and push image
