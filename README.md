@@ -36,6 +36,26 @@ docker run --rm -p 127.0.0.1:8000:8000 \
 
 The server binds to `0.0.0.0:8000` inside the container.
 
+## Quick start (PyPI / pip)
+
+You can also install and run the server directly with `pip` instead of Docker:
+
+```bash
+# Install from PyPI
+pip install connectlife-mcp-server
+
+# Run with environment variables (recommended)
+MCP_CONNECTLIFE_USERNAME="your@email.com" \
+MCP_CONNECTLIFE_PASSWORD="yourpassword" \
+python -m connectlife_mcp
+```
+
+Or set the variables in your shell/environment and then run `python -m connectlife_mcp`.
+
+The server will start on the host and port configured by `FASTMCP_HOST` and `FASTMCP_PORT` (default `127.0.0.1:8000`).
+
+---
+
 ## MCP endpoint
 
 ```
