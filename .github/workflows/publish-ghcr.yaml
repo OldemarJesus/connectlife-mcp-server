@@ -1,12 +1,9 @@
 name: Publish container to GHCR
 
 on:
-  # Run on successful CI after merge to main
-  workflow_run:
-    workflows: ["CI — lint, type-check, test, security"]
-    types: [completed]
-    branches: [main]
   # Always publish on version tags and manual triggers
+  # Note: workflow_run trigger doesn't grant GITHUB_TOKEN write permissions to packages,
+  # so we only publish on tags (which are created after successful CI/releases)
   push:
     tags:
       - "v*"
@@ -26,10 +23,6 @@ jobs:
       packages: write
       id-token: write
       attestations: write
-    # Only proceed if this was triggered by a tag/manual run, OR the CI workflow succeeded
-    if: >
-      github.event_name != 'workflow_run' ||
-      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,6 +45,8 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
+            type=match,pattern=v(.*),group=1,enable={{is_version}}
+            type=raw,value=latest,enable={{is_version}}
             type=ref,event=branch
             type=ref,event=tag
             type=sha,prefix=sha-
