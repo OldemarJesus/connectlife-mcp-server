@@ -24,8 +24,7 @@ Instead, use one of the following private channels:
    <https://github.com/OldemarJesus/connectlife-mcp/security/advisories/new>
 
 2. **Email the maintainers**  
-   Send a description of the issue to: **security@example.com**  
-   *(Replace with a real maintainer email address once available.)*
+   Send a description of the issue to: **oldemego@gmail.com**
 
 ### What to include
 
